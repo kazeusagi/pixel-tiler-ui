@@ -1,7 +1,7 @@
 pre-commit:
-  piped: true
+  parallel: true
   commands:
-    build:
-      run: bun run build
     check:
       run: bunx biome check
+    build:
+      run: bun run build
