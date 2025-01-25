@@ -1,0 +1,7 @@
+pre-commit:
+  piped: true
+  commands:
+    build:
+      run: bun run build
+    check:
+      run: bunx biome check
