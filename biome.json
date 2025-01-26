@@ -12,7 +12,7 @@
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
-    "lineWidth": 80,
+    "lineWidth": 100,
     "bracketSpacing": true
   },
   "organizeImports": {
@@ -23,7 +23,8 @@
     "rules": {
       "recommended": true,
       "correctness": {
-        "noUnusedImports": "warn"
+        "noUnusedImports": "warn",
+        "useExhaustiveDependencies": "info"
       }
     }
   },

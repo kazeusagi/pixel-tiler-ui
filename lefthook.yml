@@ -5,3 +5,8 @@ pre-commit:
       run: bunx biome check
     build:
       run: bun run build
+
+prepare-commit-msg:
+  commands:
+    check:
+      run: bunx biome check
