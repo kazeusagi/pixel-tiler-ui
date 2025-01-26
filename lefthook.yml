@@ -1,5 +1,5 @@
 pre-commit:
-  parallel: true
+  parallel: true # 並列実行
   commands:
     check:
       run: bunx biome check
