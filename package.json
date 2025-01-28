@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "biome check"
+    "lint": "biome check",
+    "init": "lefthook install"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

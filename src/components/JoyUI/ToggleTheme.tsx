@@ -2,11 +2,11 @@
 
 import { defaultModeAtom } from '@/util/atom';
 import { Button, useColorScheme } from '@mui/joy';
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 
 export function ToggleTheme() {
   const { mode, setMode } = useColorScheme();
-  const [defaultMode, setDefaultMode] = useAtom(defaultModeAtom);
+  const setDefaultMode = useSetAtom(defaultModeAtom);
 
   return <Button {...{ onClick }}>aa</Button>;
 

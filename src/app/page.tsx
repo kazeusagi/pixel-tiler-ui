@@ -1,8 +1,11 @@
 'use client';
 
-export default function Home() {
-  let test = 1;
-  test = 2;
+import { ToggleTheme } from '@/components/JoyUI/ToggleTheme';
 
-  return <>Hello World !</>;
+export default function Home() {
+  return (
+    <>
+      <ToggleTheme />
+    </>
+  );
 }
