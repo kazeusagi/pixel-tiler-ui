@@ -1,0 +1,21 @@
+name: test
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  TAG: latest
+
+jobs:
+  test:
+    name: Echo Test
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Echo
+        run: echo "${PROJECT_ID}"
+      - name: Echo
+        run: echo "${TAG}"

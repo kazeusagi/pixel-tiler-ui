@@ -3,18 +3,18 @@ name: Deploy to Dev
 on:
   push:
     branches:
-      - main
+      - unknown
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+  WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
   IMAGE: ${{ secrets.GCP_IMAGE }}
   REGION: ${{ secrets.GCP_REGION }}
   TAG: latest
 
 jobs:
-  setup-build-publish-deploy:
-    name: Setup, Build, Publish, and Deploy.
+  build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
     # Add "id-token" with the intended permissions.
     permissions:
@@ -27,7 +27,7 @@ jobs:
         name: Authenticate with Google Cloud
         uses: 'google-github-actions/auth@v2'
         with:
-          project_id: 'shared-449000'
+          project_id: ${PROJECT_ID}
           workload_identity_provider: 'projects/728042595973/locations/global/workloadIdentityPools/github/providers/my-repo'
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v2'
@@ -36,11 +36,11 @@ jobs:
       # - name: Configure Docker
       #   run: gcloud auth configure-docker asia-northeast1-docker.pkg.dev
 
-      # - name: Build
-      #   run: docker build --platform linux/amd64 -f Dockerfile.prod -t asia-northeast1-docker.pkg.dev/$PROJECT_ID/$SERVICE_NAME/$IMAGE:$TAG .
-
-      # - name: Push
-      #   run: docker push asia-northeast1-docker.pkg.dev/$PROJECT_ID/$SERVICE_NAME/$IMAGE:$TAG
-
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: user/app:latest
+          file: Dockerfile.dev
       # - name: Deploy
       #   run: gcloud run deploy $SERVICE_NAME --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/$SERVICE_NAME/$IMAGE:$TAG --platform managed --region $REGION --allow-unauthenticated
