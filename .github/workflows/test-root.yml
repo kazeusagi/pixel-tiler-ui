@@ -1,0 +1,27 @@
+on:
+  push:
+    branches: [develop,  main]
+
+jobs:
+  dev:
+    name: dev test
+    if: ${{ github.ref == 'refs/heads/develop' || github.base_ref == 'develop' }}
+    uses: ./.github/workflows/_test.yaml
+    # permissions: 
+    #   id-token: write
+    #   contents: read
+    with: 
+      environment: dev
+      ref: ${{ github.sha }}
+    secrets: inherit
+  prod:
+    name: prod test
+    if: ${{ github.ref == 'refs/heads/main' || github.base_ref == 'main' }}
+    uses: ./.github/workflows/_test.yaml
+    # permissions: 
+    #   id-token: write
+    #   contents: read
+    with:
+      environment: prod
+      ref: ${{ github.sha }}
+    secrets: inherit

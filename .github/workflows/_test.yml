@@ -1,0 +1,20 @@
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+        description: Name of the target environment.    
+      ref:  
+        type: string
+        required: true
+        description: The tag or SHA to checkout.
+
+jobs:
+  check-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo input values
+        run: |
+          echo "Environment: ${{ inputs.environment }}"
+          echo "Ref: ${{ inputs.ref }}"

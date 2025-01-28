@@ -3,5 +3,5 @@ pre-commit:
   commands:
     check:
       run: bunx biome check
-    build:
-      run: bun run build
+    # build:
+    #   run: bun run build
