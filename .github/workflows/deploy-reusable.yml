@@ -17,6 +17,7 @@ env:
   WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
   IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
   REGION: ${{ secrets.REGION }}
+  TEST: ${{ vars.TEST }}
   TAG: latest
 
 jobs:
@@ -30,6 +31,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: echo
+        run: echo ${TEST}
       - id: auth
         name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2
