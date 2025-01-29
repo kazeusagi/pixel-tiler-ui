@@ -10,16 +10,18 @@ on:
         required: true
         description: The tag or SHA to checkout.
 
+
+env:
+  TEST: ${{ vars.TEST }}
+
 jobs:
   check-inputs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
-    env:
-      TEST: ${{ vars.TEST }}
     steps:
       - name: Echo input values
         run: |
           echo "Environment: ${{ inputs.environment }}"
           echo "Ref: ${{ inputs.ref }}"
       - name: Echo vars
-        run: echo "test: $TEST"
+        run: 'echo "test: $TEST"'
