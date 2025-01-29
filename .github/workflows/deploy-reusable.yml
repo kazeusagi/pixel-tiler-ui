@@ -15,7 +15,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
   WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
-  IMAGE: ${{ secrets.IMAGE_NAME }}
+  IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
   REGION: ${{ secrets.REGION }}
   TAG: latest
 
@@ -40,8 +40,6 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
       - name: Use gcloud CLI
         run: gcloud info
-      # - name: Configure Docker
-      #   run: gcloud auth configure-docker asia-northeast1-docker.pkg.dev
 
       # - name: Build and push
       #   uses: docker/build-push-action@v6
