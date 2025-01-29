@@ -1,15 +1,22 @@
 name: Deploy to Dev
 
 on:
-  push:
-    branches:
-      - unknown
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+        description: Name of the target environment.    
+      ref:  
+        type: string
+        required: true
+        description: The tag or SHA to checkout.
 
 env:
-  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
   WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
-  IMAGE: ${{ secrets.GCP_IMAGE }}
-  REGION: ${{ secrets.GCP_REGION }}
+  IMAGE: ${{ secrets.IMAGE_NAME }}
+  REGION: ${{ secrets.REGION }}
   TAG: latest
 
 jobs:
@@ -36,11 +43,11 @@ jobs:
       # - name: Configure Docker
       #   run: gcloud auth configure-docker asia-northeast1-docker.pkg.dev
 
-      - name: Build and push
-        uses: docker/build-push-action@v6
-        with:
-          push: true
-          tags: user/app:latest
-          file: Dockerfile.dev
+      # - name: Build and push
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     push: true
+      #     tags: user/app:latest
+      #     file: Dockerfile.dev
       # - name: Deploy
       #   run: gcloud run deploy $SERVICE_NAME --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/$SERVICE_NAME/$IMAGE:$TAG --platform managed --region $REGION --allow-unauthenticated

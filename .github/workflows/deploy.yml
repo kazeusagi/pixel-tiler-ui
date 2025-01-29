@@ -6,8 +6,8 @@ jobs:
   dev:
     name: dev test
     if: ${{ github.ref == 'refs/heads/develop' || github.base_ref == 'develop' }}
-    uses: ./.github/workflows/_test.yml
-    # permissions: 
+    uses: ./.github/workflows/deploy-reusable.yml
+    # permissions:
     #   id-token: write
     #   contents: read
     with: 
@@ -17,8 +17,8 @@ jobs:
   prod:
     name: prod test
     if: ${{ github.ref == 'refs/heads/main' || github.base_ref == 'main' }}
-    uses: ./.github/workflows/_test.yml
-    # permissions: 
+    uses: ./.github/workflows/deploy-reusable.yml
+    # permissions:
     #   id-token: write
     #   contents: read
     with:

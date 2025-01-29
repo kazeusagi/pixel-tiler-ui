@@ -10,7 +10,6 @@ on:
         required: true
         description: The tag or SHA to checkout.
 
-
 env:
   TEST: ${{ vars.TEST }}
 

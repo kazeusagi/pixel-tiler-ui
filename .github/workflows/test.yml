@@ -1,0 +1,21 @@
+on:
+  push:
+    branches: [not-exist]
+
+jobs:
+  dev:
+    name: dev test
+    if: ${{ github.ref == 'refs/heads/develop' || github.base_ref == 'develop' }}
+    uses: ./.github/workflows/test-reusable.yml
+    with: 
+      environment: dev
+      ref: ${{ github.sha }}
+    secrets: inherit
+  prod:
+    name: prod test
+    if: ${{ github.ref == 'refs/heads/main' || github.base_ref == 'main' }}
+    uses: ./.github/workflows/test-reusable.yml
+    with:
+      environment: prod
+      ref: ${{ github.sha }}
+    secrets: inherit
