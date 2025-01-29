@@ -23,7 +23,7 @@ jobs:
   build-and-deploy:
     name: Build and Deploy
     runs-on: ubuntu-latest
-    # Add "id-token" with the intended permissions.
+    environment: ${{ inputs.environment }}
     permissions:
       contents: 'read'
       id-token: 'write'
