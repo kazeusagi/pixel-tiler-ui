@@ -7,9 +7,9 @@ jobs:
     name: dev test
     if: ${{ github.ref == 'refs/heads/develop' || github.base_ref == 'develop' }}
     uses: ./.github/workflows/deploy-reusable.yml
-    # permissions:
-    #   id-token: write
-    #   contents: read
+    permissions:
+      id-token: write
+      contents: read
     with: 
       environment: dev
       ref: ${{ github.sha }}
@@ -18,9 +18,9 @@ jobs:
     name: prod test
     if: ${{ github.ref == 'refs/heads/main' || github.base_ref == 'main' }}
     uses: ./.github/workflows/deploy-reusable.yml
-    # permissions:
-    #   id-token: write
-    #   contents: read
+    permissions:
+      id-token: write
+      contents: read
     with:
       environment: prod
       ref: ${{ github.sha }}
