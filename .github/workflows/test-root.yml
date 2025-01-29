@@ -6,7 +6,7 @@ jobs:
   dev:
     name: dev test
     if: ${{ github.ref == 'refs/heads/develop' || github.base_ref == 'develop' }}
-    uses: ./.github/workflows/_test.yaml
+    uses: ./.github/workflows/_test.yml
     # permissions: 
     #   id-token: write
     #   contents: read
@@ -17,7 +17,7 @@ jobs:
   prod:
     name: prod test
     if: ${{ github.ref == 'refs/heads/main' || github.base_ref == 'main' }}
-    uses: ./.github/workflows/_test.yaml
+    uses: ./.github/workflows/_test.yml
     # permissions: 
     #   id-token: write
     #   contents: read
