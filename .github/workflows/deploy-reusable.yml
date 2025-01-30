@@ -29,8 +29,6 @@ jobs:
       contents: 'read'
       id-token: 'write'
     steps:
-      - run: touch ${{ secrets.PROJECT_ID }}.txt
-      - run: ls -la
       - name: Checkout
         uses: actions/checkout@v4
       - name: echo
@@ -39,8 +37,8 @@ jobs:
         name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          project_id: ${{ secrets.PROJECT_ID }}
-          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          project_id: ${{ env.PROJECT_ID }}
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
       - name: Use gcloud CLI
