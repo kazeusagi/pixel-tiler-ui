@@ -15,9 +15,9 @@ on:
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
   WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
-  IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
+  REPOSITORY: ${{ secrets.REPOSITORY }}
+  IMAGE: ${{ secrets.IMAGE }}
   REGION: ${{ secrets.REGION }}
-  TEST: ${{ vars.TEST }}
   TAG: latest
 
 jobs:
@@ -43,12 +43,11 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
       - name: Use gcloud CLI
         run: gcloud info
-
-      # - name: Build and push
-      #   uses: docker/build-push-action@v6
-      #   with:
-      #     push: true
-      #     tags: user/app:latest
-      #     file: Dockerfile.dev
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: '${{env.REGION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.REPOSITORY}}/${{env.IMAGE}}:${{env.TAG}}'
+          file: Dockerfile.${{inputs.environment}}
       # - name: Deploy
       #   run: gcloud run deploy $SERVICE_NAME --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/$SERVICE_NAME/$IMAGE:$TAG --platform managed --region $REGION --allow-unauthenticated
