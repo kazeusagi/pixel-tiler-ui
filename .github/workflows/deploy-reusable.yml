@@ -15,6 +15,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
   WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+  SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
   REPOSITORY: ${{ secrets.REPOSITORY }}
   IMAGE: ${{ secrets.IMAGE }}
   REGION: ${{ secrets.REGION }}
@@ -39,15 +40,20 @@ jobs:
         with:
           project_id: ${{ env.PROJECT_ID }}
           workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{env.SERVICE_ACCOUNT}}
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
       - name: Use gcloud CLI
         run: gcloud info
+      - name: Configure Docker
+        run: gcloud auth configure-docker
+      - run: gcloud artifacts repositories list --project ${{env.PROJECT_ID}}
+      - run: gcloud artifacts repositories describe "${{env.REPOSITORY}}" --location="${{env.REGION}}" --project ${{env.PROJECT_ID}}
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: '${{env.REGION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.REPOSITORY}}/${{env.IMAGE}}:${{env.TAG}}'
+          tags: ${{env.REGION}}-docker.pkg.dev/${{env.PROJECT_ID}}/${{env.REPOSITORY}}/${{env.IMAGE}}-${{inputs.environment}}:${{env.TAG}}
           file: Dockerfile.${{inputs.environment}}
       # - name: Deploy
       #   run: gcloud run deploy $SERVICE_NAME --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/$SERVICE_NAME/$IMAGE:$TAG --platform managed --region $REGION --allow-unauthenticated
