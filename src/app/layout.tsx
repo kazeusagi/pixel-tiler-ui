@@ -1,5 +1,7 @@
 import { ThemeProvider } from '@/components/JoyUI';
+import { LoadingBar } from '@/components/Loading';
 import type { Metadata } from 'next';
+import { ToastContainer } from 'react-toastify';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,7 +16,11 @@ export default function RootLayout({
   return (
     <html lang='ja' suppressHydrationWarning>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ToastContainer />
+        <ThemeProvider>
+          <LoadingBar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

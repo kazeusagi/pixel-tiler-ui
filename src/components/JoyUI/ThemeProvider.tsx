@@ -1,6 +1,6 @@
 'use client';
 
-import { defaultModeAtom } from '@/util/atom';
+import { defaultModeAtom } from '@/util/atoms';
 import { CssBaseline, CssVarsProvider, extendTheme } from '@mui/joy';
 import InitColorSchemeScript from '@mui/joy/InitColorSchemeScript';
 import { useAtomValue } from 'jotai';

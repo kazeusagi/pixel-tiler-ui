@@ -1,6 +1,6 @@
 'use client';
 
-import { defaultModeAtom } from '@/util/atom';
+import { defaultModeAtom } from '@/util/atoms';
 import { Button, useColorScheme } from '@mui/joy';
 import { useSetAtom } from 'jotai';
 
