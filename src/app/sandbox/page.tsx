@@ -1,3 +1,9 @@
+import { MyLink } from '@/components/Elements';
+
 export default function Page() {
-  return <></>;
+  return (
+    <>
+      <MyLink href='/sandbox/sidebar'>sidebar</MyLink>
+    </>
+  );
 }

@@ -45,8 +45,8 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
       - name: Use gcloud CLI
         run: gcloud info
-      - name: Configure Docker
-        run: gcloud auth configure-docker
+      - name: 'Docker auth'
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
       # - run: gcloud artifacts repositories list --project="${{env.PROJECT_ID}}"
       # - run: gcloud artifacts repositories describe "${{env.REPOSITORY}}" --location="${{env.REGION}}" --project ${{env.PROJECT_ID}}
       - name: Build and push

@@ -1,3 +1,5 @@
+'use client';
+
 import { loadingStatusAtom } from '@/util/atoms';
 import { Link as JoyLink } from '@mui/joy';
 import { useSetAtom } from 'jotai';

@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [not-exist]
+    branches: [main]
 
 jobs:
   dev:
